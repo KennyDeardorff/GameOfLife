@@ -16,6 +16,8 @@ namespace GameOfLife
 
         public void Tick()
         {
+            var died = new List<Tuple<int, int>>();
+
             for (var cellIndex = LivingCells.Count - 1; cellIndex >= 0; cellIndex--)
             {
                 var cell = LivingCells[cellIndex];
@@ -34,12 +36,11 @@ namespace GameOfLife
                         neighbors += 1;
                 }
 
-                if (neighbors < 1 || 3 < neighbors)
-                    LivingCells.Remove(cell);
+                if (neighbors < 2 || 3 < neighbors)
+                    died.Add(cell);
             }
 
-            if (LivingCells.Count <= 2)
-                LivingCells.Clear();
+            LivingCells.RemoveAll(tuple => died.Contains(tuple));
         }
 
         public override string ToString()

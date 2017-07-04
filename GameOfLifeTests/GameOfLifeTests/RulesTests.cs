@@ -43,12 +43,12 @@ namespace GameOfLifeTests
         public void ALivingCellWithMoreThanThreeNeighborsDies()
         {
             var expected =
-                "XX " + Environment.NewLine +
+                "X  " + Environment.NewLine +
                 "X X";
 
             var game = new Game(new[]
             {
-                "XX",
+                "XX ",
                 "XXX"
             });
 
@@ -66,8 +66,26 @@ namespace GameOfLifeTests
 
             var game = new Game(new[]
             {
-                " X",
+                " X ",
                 "XXX"
+            });
+
+            game.Tick();
+
+            Assert.AreEqual(expected, game.ToString());
+        }
+
+        [TestMethod]
+        public void Bug2()
+        {
+            var expected =
+                "X";
+
+            var game = new Game(new[]
+            {
+                "X",
+                "X",
+                "X",
             });
 
             game.Tick();
@@ -84,7 +102,7 @@ namespace GameOfLifeTests
 
         //    var game = new Game(new[]
         //    {
-        //        " X",
+        //        " X ",
         //        "X X"
         //    });
 
