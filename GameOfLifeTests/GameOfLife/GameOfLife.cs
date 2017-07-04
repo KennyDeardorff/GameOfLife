@@ -22,22 +22,20 @@ namespace GameOfLife
                 var neighbors = 0;
 
                 for (var i1 = cell.Item1 - 1; i1 <= cell.Item1 + 1; i1++)
+                for (var i2 = cell.Item2 - 1; i2 <= cell.Item2 + 1; i2++)
                 {
-                    for (var i2 = cell.Item2 - 1; i2 <= cell.Item2 + 1; i2++)
-                    {
-                        if (i1 == 0 && i2 == 0) continue;
+                    if (i1 == cell.Item1 && i2 == cell.Item2)
+                        continue;
 
-                        var isAlive = LivingCells
-                            .Any(tuple => tuple.Item1  == i1 && tuple.Item2==i2);
+                    var isAlive = LivingCells
+                        .Any(tuple => tuple.Item1 == i1 && tuple.Item2 == i2);
 
-                        if (isAlive)
-                            neighbors += 1;
-                    }
+                    if (isAlive)
+                        neighbors += 1;
                 }
 
                 if (neighbors < 1 || 3 < neighbors)
                     LivingCells.Remove(cell);
-
             }
 
             if (LivingCells.Count <= 2)

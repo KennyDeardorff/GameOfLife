@@ -56,5 +56,41 @@ namespace GameOfLifeTests
 
             Assert.AreEqual(expected, game.ToString());
         }
+
+        [TestMethod]
+        public void Bug1()
+        {
+            var expected =
+                " X " + Environment.NewLine +
+                "XXX";
+
+            var game = new Game(new[]
+            {
+                " X",
+                "XXX"
+            });
+
+            game.Tick();
+
+            Assert.AreEqual(expected, game.ToString());
+        }
+
+        //[TestMethod]
+        //public void ADeadCellWithExactlyThreeNeighborsComesAlive()
+        //{
+        //    var expected =
+        //        " X " + Environment.NewLine +
+        //        "XXX";
+
+        //    var game = new Game(new[]
+        //    {
+        //        " X",
+        //        "X X"
+        //    });
+
+        //    game.Tick();
+
+        //    Assert.AreEqual(expected, game.ToString());
+        //}
     }
 }
