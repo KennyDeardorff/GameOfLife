@@ -39,20 +39,22 @@ namespace GameOfLifeTests
             Assert.AreEqual(expected, game.ToString());
         }
 
-        //[TestMethod]
-        //public void ALivingCellWithMoreThanThreeNeighborsDies()
-        //{
-        //    var expected = string.Empty;
+        [TestMethod]
+        public void ALivingCellWithMoreThanThreeNeighborsDies()
+        {
+            var expected =
+                "XX " + Environment.NewLine +
+                "X X";
 
-        //    var game = new Game(new[]
-        //    {
-        //        "XX",
-        //        "XX"
-        //    });
+            var game = new Game(new[]
+            {
+                "XX",
+                "XXX"
+            });
 
-        //    game.Tick();
+            game.Tick();
 
-        //    Assert.AreEqual(expected, game.ToString());
-        //}
+            Assert.AreEqual(expected, game.ToString());
+        }
     }
 }
