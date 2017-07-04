@@ -26,7 +26,7 @@ namespace GameOfLifeTests
         {
             var expected =
                 "XX" + Environment.NewLine +
-                "X ";
+                "XX";
 
             var game = new Game(new[]
             {
@@ -43,8 +43,9 @@ namespace GameOfLifeTests
         public void ALivingCellWithMoreThanThreeNeighborsDies()
         {
             var expected =
-                "X  " + Environment.NewLine +
-                "X X";
+                "X X" + Environment.NewLine +
+                "X X" + Environment.NewLine +
+                " X ";
 
             var game = new Game(new[]
             {
@@ -61,8 +62,9 @@ namespace GameOfLifeTests
         public void Bug1()
         {
             var expected =
-                " X " + Environment.NewLine +
-                "XXX";
+                "XXX" + Environment.NewLine +
+                "XXX" + Environment.NewLine +
+                " X ";
 
             var game = new Game(new[]
             {
@@ -79,7 +81,7 @@ namespace GameOfLifeTests
         public void Bug2()
         {
             var expected =
-                "X";
+                "XXX";
 
             var game = new Game(new[]
             {
@@ -93,22 +95,22 @@ namespace GameOfLifeTests
             Assert.AreEqual(expected, game.ToString());
         }
 
-        //[TestMethod]
-        //public void ADeadCellWithExactlyThreeNeighborsComesAlive()
-        //{
-        //    var expected =
-        //        " X " + Environment.NewLine +
-        //        "XXX";
+        [TestMethod]
+        public void ADeadCellWithExactlyThreeNeighborsComesAlive()
+        {
+            var expected =
+                "X" + Environment.NewLine +
+                "X";
 
-        //    var game = new Game(new[]
-        //    {
-        //        " X ",
-        //        "X X"
-        //    });
+            var game = new Game(new[]
+            {
+                " X ",
+                "X X"
+            });
 
-        //    game.Tick();
+            game.Tick();
 
-        //    Assert.AreEqual(expected, game.ToString());
-        //}
+            Assert.AreEqual(expected, game.ToString());
+        }
     }
 }

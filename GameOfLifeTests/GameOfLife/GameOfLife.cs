@@ -17,6 +17,7 @@ namespace GameOfLife
         public void Tick()
         {
             var died = new List<Tuple<int, int>>();
+            var born = new List<Tuple<int, int>>();
 
             for (var cellIndex = LivingCells.Count - 1; cellIndex >= 0; cellIndex--)
             {
@@ -33,7 +34,34 @@ namespace GameOfLife
                         .Any(tuple => tuple.Item1 == i1 && tuple.Item2 == i2);
 
                     if (isAlive)
+                    {
                         neighbors += 1;
+                    }
+                    else
+                    {
+                        var comesAliveNeighbors = 0;
+                        var isAlreadyBorn = born
+                            .Any(tuple => tuple.Item1 == i1 && tuple.Item2 == i2);
+
+                        if (isAlreadyBorn)
+                            continue;
+
+                        for (var d1 = i1 - 1; d1 <= i1 + 1; d1++)
+                        for (var d2 = i2 - 1; d2 <= i2 + 1; d2++)
+                        {
+                            if (d1 == i1 && d2 == i2)
+                                continue;
+
+                            var isAlive2 = LivingCells
+                                .Any(tuple => tuple.Item1 == d1 && tuple.Item2 == d2);
+
+                            if (isAlive2)
+                                comesAliveNeighbors += 1;
+                        }
+
+                        if (comesAliveNeighbors == 3)
+                            born.Add(new Tuple<int, int>(i1, i2));
+                    }
                 }
 
                 if (neighbors < 2 || 3 < neighbors)
@@ -41,6 +69,7 @@ namespace GameOfLife
             }
 
             LivingCells.RemoveAll(tuple => died.Contains(tuple));
+            LivingCells.AddRange(born);
         }
 
         public override string ToString()
